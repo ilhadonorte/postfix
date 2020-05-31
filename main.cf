@@ -100,7 +100,7 @@ mail_owner = postfix
 # parameters.
 #
 #mydomain = domain.tld
-
+mydomain = sumare.ru
 # SENDING MAIL
 # 
 # The myorigin parameter specifies the domain that locally-posted

@@ -93,6 +93,7 @@ mail_owner = postfix
 #
 #myhostname = host.domain.tld
 #myhostname = virtual.domain.tld
+myhostname = mailer.sumare.ru
 
 # The mydomain parameter specifies the local internet domain name.
 # The default is to use $myhostname minus the first component.
@@ -116,6 +117,7 @@ mydomain = sumare.ru
 #
 #myorigin = $myhostname
 #myorigin = $mydomain
+myorigin = $mydomain
 
 # RECEIVING MAIL
 
@@ -132,7 +134,7 @@ mydomain = sumare.ru
 #inet_interfaces = all
 #inet_interfaces = $myhostname
 #inet_interfaces = $myhostname, localhost
-inet_interfaces = localhost
+#inet_interfaces = localhost
 
 # Enable IPv4, and IPv6 if supported
 #inet_protocols = ipv4
@@ -180,10 +182,11 @@ inet_interfaces = localhost
 #
 # See also below, section "REJECTING MAIL FOR UNKNOWN LOCAL USERS".
 #
-mydestination = $myhostname, localhost.$mydomain, localhost
+#mydestination = $myhostname, localhost.$mydomain, localhost
 #mydestination = $myhostname, localhost.$mydomain, localhost, $mydomain
 #mydestination = $myhostname, localhost.$mydomain, localhost, $mydomain,
 #	mail.$mydomain, www.$mydomain, ftp.$mydomain
+mydestination = $mydomain
 
 # REJECTING MAIL FOR UNKNOWN LOCAL USERS
 #
@@ -590,6 +593,7 @@ alias_database = hash:/etc/aliases
 #
 #smtpd_banner = $myhostname ESMTP $mail_name
 #smtpd_banner = $myhostname ESMTP $mail_name ($mail_version)
+smtpd_banner = $myhostname ESMTP $mail_name ($mail_version)
 
 # PARALLEL DELIVERY TO THE SAME DESTINATION
 #

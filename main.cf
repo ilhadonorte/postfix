@@ -91,17 +91,16 @@ mail_owner = postfix
 # from gethostname(). $myhostname is used as a default value for many
 # other configuration parameters.
 #
-#myhostname = host.domain.tld
+myhostname = mailer1.sumare.ru
 #myhostname = virtual.domain.tld
-myhostname = mailer.sumare.ru
 
 # The mydomain parameter specifies the local internet domain name.
 # The default is to use $myhostname minus the first component.
 # $mydomain is used as a default value for many other configuration
 # parameters.
 #
-#mydomain = domain.tld
 mydomain = sumare.ru
+
 # SENDING MAIL
 # 
 # The myorigin parameter specifies the domain that locally-posted
@@ -116,7 +115,6 @@ mydomain = sumare.ru
 # to recipient addresses that have no @domain part.
 #
 #myorigin = $myhostname
-#myorigin = $mydomain
 myorigin = $mydomain
 
 # RECEIVING MAIL
@@ -131,7 +129,7 @@ myorigin = $mydomain
 #
 # Note: you need to stop/start Postfix when this parameter changes.
 #
-#inet_interfaces = all
+inet_interfaces = all
 #inet_interfaces = $myhostname
 #inet_interfaces = $myhostname, localhost
 #inet_interfaces = localhost
@@ -184,9 +182,9 @@ myorigin = $mydomain
 #
 #mydestination = $myhostname, localhost.$mydomain, localhost
 #mydestination = $myhostname, localhost.$mydomain, localhost, $mydomain
+mydestination =  $mydomain
 #mydestination = $myhostname, localhost.$mydomain, localhost, $mydomain,
 #	mail.$mydomain, www.$mydomain, ftp.$mydomain
-mydestination = $mydomain
 
 # REJECTING MAIL FOR UNKNOWN LOCAL USERS
 #
@@ -229,7 +227,7 @@ mydestination = $mydomain
 # 
 #local_recipient_maps = unix:passwd.byname $alias_maps
 #local_recipient_maps = proxy:unix:passwd.byname $alias_maps
-#local_recipient_maps =
+local_recipient_maps =
 
 # The unknown_local_recipient_reject_code specifies the SMTP server
 # response code when a recipient domain matches $mydestination or
@@ -593,7 +591,6 @@ alias_database = hash:/etc/aliases
 #
 #smtpd_banner = $myhostname ESMTP $mail_name
 #smtpd_banner = $myhostname ESMTP $mail_name ($mail_version)
-smtpd_banner = $myhostname ESMTP $mail_name ($mail_version)
 
 # PARALLEL DELIVERY TO THE SAME DESTINATION
 #
@@ -702,3 +699,14 @@ sample_directory = /usr/share/doc/postfix3-3.5.2/samples
 readme_directory = /usr/share/doc/postfix3-3.5.2/README_FILES
 meta_directory = /etc/postfix
 shlib_directory = /usr/lib/postfix
+
+smtpd_sasl_type = dovecot
+smtpd_sasl_path = private/auth
+smtpd_sasl_auth_enable = yes
+smtpd_relay_restrictions = permit_mynetworks, permit_sasl_authenticated, reject_unauth_destination
+broken_sasl_auth_clients = yes
+
+mailbox_transport = lmtp:unix:private/dovecot-lmtp
+
+
+

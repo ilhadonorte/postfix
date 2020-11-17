@@ -590,7 +590,7 @@ alias_database = hash:/etc/aliases
 # RFC requirement. Postfix itself does not care.
 #
 #smtpd_banner = $myhostname ESMTP $mail_name
-#smtpd_banner = $myhostname ESMTP $mail_name ($mail_version)
+smtpd_banner = wellcome to $myhostname ESMTP $mail_name ($mail_version)
 
 # PARALLEL DELIVERY TO THE SAME DESTINATION
 #
